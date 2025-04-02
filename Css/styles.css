@@ -1,0 +1,31 @@
+:root {
+    --color-negro: #121212;
+    --color-blanco: #F8F9FA;
+    --color-azul: #0066CC;
+    --color-rojo: #D72638;
+    --color-verde-oscuro: #145A32;
+    --color-verde-claro: #2ECC71;
+    --color-gris-oscuro: #343A40;
+    --color-gris-claro: #CED4DA;
+}
+
+body {
+    background-color: var(--color-negro);
+    color: var(--color-blanco);
+}
+
+button {
+    background-color: var(--color-azul);
+    color: var(--color-blanco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+button.alerta {
+    background-color: var(--color-rojo);
+}
+
+.success {
+    color: var(--color-verde-claro);
+}

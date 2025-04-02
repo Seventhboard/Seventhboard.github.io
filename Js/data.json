@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "titulo": "¿Qué es la materia oscura?",
+      "categoria": "Astronomía",
+      "etiquetas": ["Física", "Cosmología"],
+      "contenido": "La materia oscura es..."
+    },
+    {
+      "id": 2,
+      "titulo": "El origen del universo",
+      "categoria": "Cosmología",
+      "etiquetas": ["Big Bang", "Teoría"],
+      "contenido": "El universo comenzó..."
+    }
+  ]
+  
