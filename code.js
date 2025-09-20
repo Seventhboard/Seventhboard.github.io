@@ -1,128 +1,86 @@
-const titulo_selector = document.querySelector(".main_title")
-let titulo = titulo_selector.textContent
-titulo.textContent = '';
-titulo_selector.textContent = '';
-
-//index para la animacion del titulo//
-let index = 0;
-
+/* ===== ANIMACIÓN DEL TÍTULO ===== */
+const tituloSelector = document.querySelector(".main_title");
+const tituloTexto = tituloSelector.textContent;
+tituloSelector.textContent = '';
+let indiceTitulo = 0;
 function mostrarLetra() {
-  if (index < titulo.length) {
-    titulo_selector.textContent += titulo.charAt(index);
-    index++;
-  }
+    if (indiceTitulo < tituloTexto.length) {
+        tituloSelector.textContent += tituloTexto.charAt(indiceTitulo);
+        indiceTitulo++;
+    }
 }
 const intervalo = setInterval(mostrarLetra, 100);
-
-//Hasta aqui bien la animacion de las letras//
-
-
-//Hasta aqui todo bien con las lineas//
-
-
-//Ahora con las estrellas//
+/* ===== GENERACIÓN DE ESTRELLAS ===== */
 function crearEstrella() {
-  const estrella_selector = document.getElementById('div_stars');
-  const estrella = document.createElement('div');
-  estrella.classList.add('estrella');
-
-  const randomPosX = Math.random() * window.innerWidth;
-  const randomPosY = Math.random() * window.innerHeight;
-
-  estrella.style.left = `${randomPosX}px`;
-  estrella.style.top = `${randomPosY}px`;
-  estrella.style.animation = `mover 6s linear infinite, parpadear 3s ease-in-out infinite`;
-
-  estrella_selector.appendChild(estrella);
+    const contenedorEstrellas = document.getElementById('div_stars');
+    const estrella = document.createElement('div');
+    estrella.classList.add('estrella');
+    const posicionX = Math.random() * window.innerWidth;
+    const posicionY = Math.random() * window.innerHeight;
+    estrella.style.left = `${posicionX}px`;
+    estrella.style.top = `${posicionY}px`;
+    estrella.style.animation = `mover 6s linear infinite, parpadear 3s ease-in-out infinite`;
+    contenedorEstrellas.appendChild(estrella);
 }
-
+// Crear 150 estrellas para el efecto de fondo
 for (let i = 0; i < 150; i++) {
-  crearEstrella();
+    crearEstrella();
 }
-
-// Captura el elemento de efecto de transición
-const transitionEffect = document.querySelector('.div_transition');
-
-// Agrega un evento de clic al documento
+/* ===== EFECTOS DE TRANSICIÓN ===== */
+const efectoTransicion = document.querySelector('.div_transition');
 document.addEventListener('click', () => {
-    // Activa la animación al agregar una clase
-    transitionEffect.classList.add('transition_effect');
-
-    // Espera un tiempo para detener la animación
+    // Activa la animación de transición
+    efectoTransicion.classList.add('transition_effect');
+    // Desactiva la animación después de 250ms
     setTimeout(() => {
-        // Detiene la animación al quitar la clase
-        transitionEffect.classList.remove('transition_effect');
-    }, 250); // Cambia este valor para ajustar la duración de la animación
+        efectoTransicion.classList.remove('transition_effect');
+    }, 250);
 });
-
-
-
-// JavaScript en codigo.js
-const estela_selector = document.querySelector(".div_estela");
-
-let prevX, prevY;
-let fadingTime = 10; // Ajusta la velocidad de desvanecimiento (en milisegundos)
-let maxSteps = 7; // Ajusta la cantidad máxima de puntos intermedios
-
+/* ===== ESTELA DEL CURSOR ===== */
+const contenedorEstela = document.querySelector(".div_estela");
+let posicionAnteriorX, posicionAnteriorY;
+const tiempoDesvanecimiento = 10; // Velocidad de desvanecimiento en milisegundos
+const maximoPasos = 7; // Cantidad máxima de puntos intermedios
 document.addEventListener("mousemove", (e) => {
     const x = e.clientX;
     const y = e.clientY;
-
-    // Calcular puntos intermedios para suavizar y acortar la estela
-    if (prevX !== undefined && prevY !== undefined) {
-        const distance = Math.hypot(x - prevX, y - prevY);
-        const steps = Math.min(Math.ceil(distance / 0.7), maxSteps); // Limita la cantidad de puntos intermedios
-        const stepX = (x - prevX) / steps;
-        const stepY = (y - prevY) / steps;
-
-        let currentX = prevX;
-        let currentY = prevY;
-
-        for (let i = 0; i < steps; i++) {
-            const intermediateEstela = document.createElement("div");
-            intermediateEstela.className = "estela-item";
-            intermediateEstela.style.left = `${currentX}px`;
-            intermediateEstela.style.top = `${currentY}px`;
-            estela_selector.appendChild(intermediateEstela);
-
+    // Calcular puntos intermedios para suavizar la estela
+    if (posicionAnteriorX !== undefined && posicionAnteriorY !== undefined) {
+        const distancia = Math.hypot(x - posicionAnteriorX, y - posicionAnteriorY);
+        const pasos = Math.min(Math.ceil(distancia / 0.7), maximoPasos);
+        const pasoX = (x - posicionAnteriorX) / pasos;
+        const pasoY = (y - posicionAnteriorY) / pasos;
+        let posicionActualX = posicionAnteriorX;
+        let posicionActualY = posicionAnteriorY;
+        for (let i = 0; i < pasos; i++) {
+            const puntoIntermedio = document.createElement("div");
+            puntoIntermedio.className = "estela-item";
+            puntoIntermedio.style.left = `${posicionActualX}px`;
+            puntoIntermedio.style.top = `${posicionActualY}px`;
+            contenedorEstela.appendChild(puntoIntermedio);
             setTimeout(() => {
-                intermediateEstela.style.opacity = 0;
+                puntoIntermedio.style.opacity = 0;
                 setTimeout(() => {
-                    intermediateEstela.remove();
-                }, fadingTime);
-            }, i * fadingTime);
-
-            currentX += stepX;
-            currentY += stepY;
+                    puntoIntermedio.remove();
+                }, tiempoDesvanecimiento);
+            }, i * tiempoDesvanecimiento);
+            posicionActualX += pasoX;
+            posicionActualY += pasoY;
         }
     }
-
-    const estela = document.createElement("div");
-    estela.className = "estela-item";
-    estela.style.left = `${x}px`;
-    estela.style.top = `${y}px`;
-
-    estela_selector.appendChild(estela);
-
+    // Crear punto principal de la estela
+    const puntoEstela = document.createElement("div");
+    puntoEstela.className = "estela-item";
+    puntoEstela.style.left = `${x}px`;
+    puntoEstela.style.top = `${y}px`;
+    contenedorEstela.appendChild(puntoEstela);
     setTimeout(() => {
-        estela.style.opacity = 0;
+        puntoEstela.style.opacity = 0;
         setTimeout(() => {
-            estela.remove();
-        }, fadingTime);
+            puntoEstela.remove();
+        }, tiempoDesvanecimiento);
     }, 0);
-
-    // Actualizar las coordenadas anteriores
-    prevX = x;
-    prevY = y;
+    // Actualizar coordenadas anteriores
+    posicionAnteriorX = x;
+    posicionAnteriorY = y;
 });
-
-
-
-
-
-
-
-
-
-
-

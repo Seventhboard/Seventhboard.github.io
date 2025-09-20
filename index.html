@@ -1,22 +1,39 @@
-<!DOCTYPE html> 
-<!-- El objetivo de este HTML es crear la pagina de presentacion para un aplicativo web que emule un juego de rol -->
+<!DOCTYPE html>
+<!-- 
+    VC System - Página de presentación
+    Aplicativo web que emula un juego de rol con efectos visuales interactivos
+    Incluye: animación de título, estrellas dinámicas, estela del cursor y transiciones
+-->
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vc System</title>
+    <title>VC System - Welcome</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Contenedor principal de la aplicación -->
     <section id="main_section" class="main_section_class">
+        <!-- Contenedor para el efecto de estela del cursor -->
         <div class="div_estela"></div>
+        
+        <!-- Contenedor del título principal con animación -->
         <div class="div_title">
-            <h1 class="main_title">Welcome to VC System</h1> <p id="startPoint" >.</p>
+            <h1 class="main_title">Welcome to VC System</h1>
+            <p id="startPoint">.</p>
         </div>
+        
+        <!-- Contenedor para las estrellas animadas -->
         <div id="div_stars" class="div_stars_class"></div>
+        
+        <!-- Overlay para efectos adicionales -->
         <div class="div_overlay_one"></div>
+        
+        <!-- Capa de transición para efectos de click -->
         <div class="div_transition"></div>
     </section>
+    
+    <!-- Script principal de la aplicación -->
     <script src="code.js"></script>
 </body>
 </html>
