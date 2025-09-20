@@ -114,3 +114,382 @@ body, h1 {
         opacity: 0;
     }
 }
+
+/* ===== HOJA DE PERSONAJE ===== */
+.character_sheet_class {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    padding: 20px;
+    font-family: 'Major Mono Display', monospace;
+    color: aliceblue;
+    overflow-y: auto;
+}
+
+.character_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.character_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.character_title {
+    font-size: 2.5rem;
+    color: aliceblue;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.back_button {
+    background: linear-gradient(45deg, #0078D4, #106ebe);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3);
+}
+
+.back_button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 120, 212, 0.5);
+}
+
+.character_content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.character_column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.character_field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.character_field label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #0078D4;
+    text-shadow: 0 0 5px rgba(0, 120, 212, 0.5);
+}
+
+.character_field input,
+.character_field textarea,
+.character_field select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    color: aliceblue;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.character_field input:focus,
+.character_field textarea:focus,
+.character_field select:focus {
+    outline: none;
+    border-color: #0078D4;
+    box-shadow: 0 0 10px rgba(0, 120, 212, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.character_field input::placeholder,
+.character_field textarea::placeholder {
+    color: rgba(240, 248, 255, 0.6);
+}
+
+.character_field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.character_connections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.abilities_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.ability_item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.ability_item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #0078D4;
+}
+
+.ability_info {
+    flex: 1;
+}
+
+.ability_name {
+    font-weight: bold;
+    color: #0078D4;
+    margin-bottom: 5px;
+}
+
+.ability_description {
+    font-size: 0.9rem;
+    color: rgba(240, 248, 255, 0.8);
+    margin-bottom: 5px;
+}
+
+.ability_stats {
+    font-size: 0.8rem;
+    color: rgba(240, 248, 255, 0.6);
+}
+
+.ability_actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit_button,
+.delete_button {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: aliceblue;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.edit_button:hover {
+    background: rgba(0, 120, 212, 0.3);
+    border-color: #0078D4;
+}
+
+.delete_button:hover {
+    background: rgba(220, 53, 69, 0.3);
+    border-color: #dc3545;
+}
+
+.add_button {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+}
+
+.add_button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.5);
+}
+
+/* Modal para agregar/editar habilidades */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal_content {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal_title {
+    font-size: 1.5rem;
+    color: aliceblue;
+    margin: 0;
+}
+
+.close_modal {
+    background: none;
+    border: none;
+    color: aliceblue;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.close_modal:hover {
+    background: rgba(220, 53, 69, 0.3);
+}
+
+.modal_form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form_group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form_group label {
+    font-size: 0.9rem;
+    color: #0078D4;
+    font-weight: bold;
+}
+
+.form_group input,
+.form_group select,
+.form_group textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 10px;
+    color: aliceblue;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.9rem;
+}
+
+.form_group input:focus,
+.form_group select:focus,
+.form_group textarea:focus {
+    outline: none;
+    border-color: #0078D4;
+    box-shadow: 0 0 8px rgba(0, 120, 212, 0.3);
+}
+
+.modal_actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.save_button,
+.cancel_button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save_button {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+}
+
+.save_button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.5);
+}
+
+.cancel_button {
+    background: rgba(255, 255, 255, 0.1);
+    color: aliceblue;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancel_button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .character_content,
+    .character_connections {
+        grid-template-columns: 1fr;
+    }
+    
+    .character_header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .character_title {
+        font-size: 2rem;
+    }
+    
+    .modal_content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .form_row {
+        grid-template-columns: 1fr;
+    }
+}
