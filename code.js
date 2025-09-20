@@ -556,6 +556,59 @@ function actualizarListas() {
     });
 }
 
+// Función para calcular atributos derivados
+function calcularAtributosDerivados() {
+    const fuerza = parseInt(document.getElementById('fuerza').value) || 0;
+    const destreza = parseInt(document.getElementById('destreza').value) || 0;
+    const vitalidad = parseInt(document.getElementById('vitalidad').value) || 0;
+    const eco = parseInt(document.getElementById('eco').value) || 0;
+    
+    // Atributos específicos
+    document.getElementById('impacto').value = fuerza + destreza;
+    document.getElementById('control_masas').value = fuerza + vitalidad;
+    
+    // Capacidades de daño
+    document.getElementById('ataque').value = fuerza;
+    document.getElementById('poder').value = eco;
+    document.getElementById('imbuir').value = eco + fuerza;
+    
+    // Capacidades defensivas
+    document.getElementById('defensa').value = vitalidad;
+    document.getElementById('cancelacion').value = eco;
+    document.getElementById('aura').value = eco + vitalidad;
+    
+    // Recursos vitales
+    document.getElementById('vida_base').value = vitalidad * 2;
+    document.getElementById('energia_base').value = vitalidad * 5;
+    document.getElementById('resonancia_base').value = eco * 5;
+    
+    // Actualizar valores actuales si no están establecidos
+    const vidaActual = document.getElementById('vida_actual');
+    const energiaActual = document.getElementById('energia_actual');
+    const resonanciaActual = document.getElementById('resonancia_actual');
+    
+    if (!vidaActual.value || vidaActual.value === '0') {
+        vidaActual.value = vitalidad * 2;
+    }
+    if (!energiaActual.value || energiaActual.value === '0') {
+        energiaActual.value = vitalidad * 5;
+    }
+    if (!resonanciaActual.value || resonanciaActual.value === '0') {
+        resonanciaActual.value = eco * 5;
+    }
+}
+
+// Función para validar atributos principales
+function validarAtributoPrincipal(input) {
+    const valor = parseInt(input.value);
+    if (valor < 1) {
+        input.value = 1;
+    } else if (valor > 100) {
+        input.value = 100;
+    }
+    calcularAtributosDerivados();
+}
+
 // Función para cargar datos del personaje desde localStorage
 function cargarDatosPersonaje() {
     const datos = localStorage.getItem('vc_system_personaje');
@@ -568,11 +621,17 @@ function cargarDatosPersonaje() {
             }
         });
     }
+    // Calcular atributos derivados después de cargar
+    calcularAtributosDerivados();
 }
 
 // Función para guardar datos del personaje
 function guardarDatosPersonaje() {
-    const campos = ['apodo', 'trasfondo', 'aspecto_exclusivo', 'rasgos', 'nivel', 'validez', 'constelacion'];
+    const campos = [
+        'apodo', 'trasfondo', 'aspecto_exclusivo', 'rasgos', 'nivel', 'validez', 'constelacion',
+        'fuerza', 'destreza', 'vitalidad', 'eco', 'comprension', 'clarividencia',
+        'vida_actual', 'energia_actual', 'resonancia_actual', 'maratones', 'heridas'
+    ];
     const datos = {};
     
     campos.forEach(campo => {
@@ -616,6 +675,73 @@ function agregarElementoSimple(tipo) {
         document.getElementById(`${tipo}_list`).appendChild(elemento);
         guardarDatosPersonaje();
     }
+}
+
+// Función para aplicar daño
+function aplicarDano() {
+    const danoInput = document.getElementById('dano_input');
+    const vidaActual = document.getElementById('vida_actual');
+    const danoLog = document.getElementById('dano_log');
+    
+    const dano = parseInt(danoInput.value) || 0;
+    if (dano <= 0) return;
+    
+    const vidaAnterior = parseInt(vidaActual.value) || 0;
+    const nuevaVida = Math.max(0, vidaAnterior - dano);
+    
+    vidaActual.value = nuevaVida;
+    danoInput.value = '';
+    
+    // Agregar entrada al log
+    const logEntry = document.createElement('div');
+    logEntry.className = 'log_entry damage_entry';
+    logEntry.textContent = `-${dano} daño (Vida: ${vidaAnterior} → ${nuevaVida})`;
+    danoLog.appendChild(logEntry);
+    danoLog.scrollTop = danoLog.scrollHeight;
+    
+    guardarDatosPersonaje();
+}
+
+// Función para aplicar curación
+function aplicarCuracion() {
+    const curacionInput = document.getElementById('curacion_input');
+    const vidaActual = document.getElementById('vida_actual');
+    const vidaBase = document.getElementById('vida_base');
+    const curacionLog = document.getElementById('curacion_log');
+    
+    const curacion = parseInt(curacionInput.value) || 0;
+    if (curacion <= 0) return;
+    
+    const vidaAnterior = parseInt(vidaActual.value) || 0;
+    const vidaMaxima = parseInt(vidaBase.value) || 0;
+    const nuevaVida = Math.min(vidaMaxima, vidaAnterior + curacion);
+    
+    vidaActual.value = nuevaVida;
+    curacionInput.value = '';
+    
+    // Agregar entrada al log
+    const logEntry = document.createElement('div');
+    logEntry.className = 'log_entry heal_entry';
+    logEntry.textContent = `+${curacion} curación (Vida: ${vidaAnterior} → ${nuevaVida})`;
+    curacionLog.appendChild(logEntry);
+    curacionLog.scrollTop = curacionLog.scrollHeight;
+    
+    guardarDatosPersonaje();
+}
+
+// Función para manejar maratones
+function manejarMaratones() {
+    const maratonesInput = document.getElementById('maratones');
+    const energiaActual = document.getElementById('energia_actual');
+    const energiaBase = document.getElementById('energia_base');
+    
+    const maratones = parseInt(maratonesInput.value) || 0;
+    const energiaMaxima = parseInt(energiaBase.value) || 0;
+    const energiaPerdida = maratones * 15;
+    const nuevaEnergia = Math.max(0, energiaMaxima - energiaPerdida);
+    
+    energiaActual.value = nuevaEnergia;
+    guardarDatosPersonaje();
 }
 
 /* ===== INICIALIZACIÓN Y EVENT LISTENERS ===== */
@@ -671,7 +797,11 @@ function inicializarAplicacion() {
         }
         
         // Auto-guardar cuando cambien los campos básicos
-        const camposBasicos = ['apodo', 'trasfondo', 'aspecto_exclusivo', 'rasgos', 'nivel', 'validez', 'constelacion'];
+        const camposBasicos = [
+            'apodo', 'trasfondo', 'aspecto_exclusivo', 'rasgos', 'nivel', 'validez', 'constelacion',
+            'fuerza', 'destreza', 'vitalidad', 'eco', 'comprension', 'clarividencia',
+            'vida_actual', 'energia_actual', 'resonancia_actual', 'heridas'
+        ];
         camposBasicos.forEach(campo => {
             const elemento = document.getElementById(campo);
             if (elemento) {
@@ -679,6 +809,78 @@ function inicializarAplicacion() {
                 elemento.addEventListener('change', guardarDatosPersonaje);
             }
         });
+        
+        // Event listeners especiales para atributos principales
+        const atributosPrincipales = ['fuerza', 'destreza', 'vitalidad', 'eco'];
+        atributosPrincipales.forEach(atributo => {
+            const elemento = document.getElementById(atributo);
+            if (elemento) {
+                elemento.addEventListener('input', (e) => {
+                    validarAtributoPrincipal(e.target);
+                    guardarDatosPersonaje();
+                });
+                elemento.addEventListener('change', (e) => {
+                    validarAtributoPrincipal(e.target);
+                    guardarDatosPersonaje();
+                });
+            }
+        });
+        
+        // Event listeners para atributos especiales
+        const atributosEspeciales = ['comprension', 'clarividencia'];
+        atributosEspeciales.forEach(atributo => {
+            const elemento = document.getElementById(atributo);
+            if (elemento) {
+                elemento.addEventListener('input', (e) => {
+                    const valor = parseInt(e.target.value);
+                    if (valor < 1) e.target.value = 1;
+                    if (valor > 100) e.target.value = 100;
+                    guardarDatosPersonaje();
+                });
+                elemento.addEventListener('change', (e) => {
+                    const valor = parseInt(e.target.value);
+                    if (valor < 1) e.target.value = 1;
+                    if (valor > 100) e.target.value = 100;
+                    guardarDatosPersonaje();
+                });
+            }
+        });
+        
+        // Event listeners para daño y curación
+        const aplicarDanoBtn = document.getElementById('aplicar_dano');
+        if (aplicarDanoBtn) {
+            aplicarDanoBtn.addEventListener('click', aplicarDano);
+        }
+        
+        const aplicarCuracionBtn = document.getElementById('aplicar_curacion');
+        if (aplicarCuracionBtn) {
+            aplicarCuracionBtn.addEventListener('click', aplicarCuracion);
+        }
+        
+        // Event listener para maratones
+        const maratonesInput = document.getElementById('maratones');
+        if (maratonesInput) {
+            maratonesInput.addEventListener('change', manejarMaratones);
+        }
+        
+        // Event listeners para Enter en campos de daño y curación
+        const danoInput = document.getElementById('dano_input');
+        if (danoInput) {
+            danoInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    aplicarDano();
+                }
+            });
+        }
+        
+        const curacionInput = document.getElementById('curacion_input');
+        if (curacionInput) {
+            curacionInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    aplicarCuracion();
+                }
+            });
+        }
         
         // Crear algunos ejemplos por defecto si no hay datos
         if (habilidadCRUD.vestigios.length === 0 && habilidadCRUD.estigmas.length === 0) {

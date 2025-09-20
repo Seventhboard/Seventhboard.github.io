@@ -227,6 +227,176 @@ body, h1 {
     min-height: 80px;
 }
 
+/* ===== SECCIONES DE ATRIBUTOS ===== */
+.attributes_section {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section_title {
+    font-size: 1.2rem;
+    color: #0078D4;
+    margin: 0 0 15px 0;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(0, 120, 212, 0.5);
+    border-bottom: 1px solid rgba(0, 120, 212, 0.3);
+    padding-bottom: 8px;
+}
+
+.attributes_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.attribute_field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.attribute_field label {
+    font-size: 0.9rem;
+    color: #0078D4;
+    font-weight: bold;
+}
+
+.attribute_field input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 8px;
+    color: aliceblue;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.attribute_field input:focus {
+    outline: none;
+    border-color: #0078D4;
+    box-shadow: 0 0 8px rgba(0, 120, 212, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.attribute_field.calculated input {
+    background: rgba(0, 120, 212, 0.1);
+    border-color: rgba(0, 120, 212, 0.3);
+    color: #0078D4;
+    font-weight: bold;
+}
+
+.attribute_field.calculated input:focus {
+    background: rgba(0, 120, 212, 0.15);
+}
+
+.calculation {
+    font-size: 0.7rem;
+    color: rgba(240, 248, 255, 0.6);
+    font-style: italic;
+    text-align: center;
+    margin-top: 2px;
+}
+
+/* ===== SECCIONES DE DAÑO Y CURACIÓN ===== */
+.damage_heal_section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.damage_heal_section input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 8px;
+    color: aliceblue;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.9rem;
+}
+
+.damage_heal_section input:focus {
+    outline: none;
+    border-color: #0078D4;
+    box-shadow: 0 0 8px rgba(0, 120, 212, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.damage_button {
+    background: linear-gradient(45deg, #dc3545, #c82333);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+}
+
+.damage_button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.5);
+}
+
+.heal_button {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+}
+
+.heal_button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.5);
+}
+
+.damage_log,
+.heal_log {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 10px;
+    max-height: 100px;
+    overflow-y: auto;
+    font-size: 0.8rem;
+}
+
+.damage_log {
+    border-left: 3px solid #dc3545;
+}
+
+.heal_log {
+    border-left: 3px solid #28a745;
+}
+
+.log_entry {
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.log_entry:last-child {
+    border-bottom: none;
+}
+
+.damage_entry {
+    color: #ff6b6b;
+}
+
+.heal_entry {
+    color: #51cf66;
+}
+
 .character_connections {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -491,5 +661,18 @@ body, h1 {
     
     .form_row {
         grid-template-columns: 1fr;
+    }
+    
+    .attributes_grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .attributes_section {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .section_title {
+        font-size: 1rem;
     }
 }

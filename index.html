@@ -52,6 +52,150 @@
                         <input type="text" id="apodo" placeholder="Nombre o título del personaje">
                     </div>
 
+                    <!-- Atributos Principales -->
+                    <div class="attributes_section">
+                        <h3 class="section_title">Atributos Principales</h3>
+                        <div class="attributes_grid">
+                            <div class="attribute_field">
+                                <label for="fuerza">Fuerza:</label>
+                                <input type="number" id="fuerza" min="1" max="100" value="1">
+                            </div>
+                            <div class="attribute_field">
+                                <label for="destreza">Destreza:</label>
+                                <input type="number" id="destreza" min="1" max="100" value="1">
+                            </div>
+                            <div class="attribute_field">
+                                <label for="vitalidad">Vitalidad:</label>
+                                <input type="number" id="vitalidad" min="1" max="100" value="1">
+                            </div>
+                            <div class="attribute_field">
+                                <label for="eco">Eco:</label>
+                                <input type="number" id="eco" min="1" max="100" value="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Atributos Específicos -->
+                    <div class="attributes_section">
+                        <h3 class="section_title">Atributos Específicos</h3>
+                        <div class="attributes_grid">
+                            <div class="attribute_field calculated">
+                                <label for="impacto">Impacto:</label>
+                                <input type="number" id="impacto" readonly>
+                                <span class="calculation">Fuerza + Destreza</span>
+                            </div>
+                            <div class="attribute_field calculated">
+                                <label for="control_masas">Control de Masas:</label>
+                                <input type="number" id="control_masas" readonly>
+                                <span class="calculation">Fuerza + Vitalidad</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capacidades de Daño -->
+                    <div class="attributes_section">
+                        <h3 class="section_title">Capacidades de Daño</h3>
+                        <div class="attributes_grid">
+                            <div class="attribute_field calculated">
+                                <label for="ataque">Ataque (Físico):</label>
+                                <input type="number" id="ataque" readonly>
+                                <span class="calculation">Fuerza</span>
+                            </div>
+                            <div class="attribute_field calculated">
+                                <label for="poder">Poder (Mágico):</label>
+                                <input type="number" id="poder" readonly>
+                                <span class="calculation">Eco</span>
+                            </div>
+                            <div class="attribute_field calculated">
+                                <label for="imbuir">Imbuir (Mixto):</label>
+                                <input type="number" id="imbuir" readonly>
+                                <span class="calculation">Eco + Fuerza</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capacidades Defensivas -->
+                    <div class="attributes_section">
+                        <h3 class="section_title">Capacidades Defensivas</h3>
+                        <div class="attributes_grid">
+                            <div class="attribute_field calculated">
+                                <label for="defensa">Defensa (Físico):</label>
+                                <input type="number" id="defensa" readonly>
+                                <span class="calculation">Vitalidad</span>
+                            </div>
+                            <div class="attribute_field calculated">
+                                <label for="cancelacion">Cancelación (Mágico):</label>
+                                <input type="number" id="cancelacion" readonly>
+                                <span class="calculation">Eco</span>
+                            </div>
+                            <div class="attribute_field calculated">
+                                <label for="aura">Aura (Mixto):</label>
+                                <input type="number" id="aura" readonly>
+                                <span class="calculation">Eco + Vitalidad</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Atributos Especiales -->
+                    <div class="attributes_section">
+                        <h3 class="section_title">Atributos Especiales</h3>
+                        <div class="attributes_grid">
+                            <div class="attribute_field">
+                                <label for="comprension">Comprensión:</label>
+                                <input type="number" id="comprension" min="1" max="100" value="1">
+                            </div>
+                            <div class="attribute_field">
+                                <label for="clarividencia">Clarividencia:</label>
+                                <input type="number" id="clarividencia" min="1" max="100" value="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recursos Vitales -->
+                    <div class="attributes_section">
+                        <h3 class="section_title">Recursos Vitales</h3>
+                        <div class="attributes_grid">
+                            <div class="attribute_field calculated">
+                                <label for="vida_base">Vida Base:</label>
+                                <input type="number" id="vida_base" readonly>
+                                <span class="calculation">Vitalidad × 2</span>
+                            </div>
+                            <div class="attribute_field calculated">
+                                <label for="energia_base">Energía Base:</label>
+                                <input type="number" id="energia_base" readonly>
+                                <span class="calculation">Vitalidad × 5</span>
+                            </div>
+                            <div class="attribute_field calculated">
+                                <label for="resonancia_base">Resonancia Base:</label>
+                                <input type="number" id="resonancia_base" readonly>
+                                <span class="calculation">Eco × 5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estado Actual -->
+                    <div class="attributes_section">
+                        <h3 class="section_title">Estado Actual</h3>
+                        <div class="attributes_grid">
+                            <div class="attribute_field">
+                                <label for="vida_actual">Vida Actual:</label>
+                                <input type="number" id="vida_actual" min="0">
+                            </div>
+                            <div class="attribute_field">
+                                <label for="energia_actual">Energía Actual:</label>
+                                <input type="number" id="energia_actual" min="0">
+                            </div>
+                            <div class="attribute_field">
+                                <label for="resonancia_actual">Resonancia Actual:</label>
+                                <input type="number" id="resonancia_actual" min="0">
+                            </div>
+                            <div class="attribute_field">
+                                <label for="maratones">Maratones:</label>
+                                <input type="number" id="maratones" min="0" value="0">
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Trasfondo -->
                     <div class="character_field">
                         <label for="trasfondo">Trasfondo:</label>
@@ -116,6 +260,36 @@
                     <div class="character_field">
                         <label for="constelacion">Constelación:</label>
                         <input type="text" id="constelacion" placeholder="Patrocinador (opcional)">
+                    </div>
+
+                    <!-- Heridas -->
+                    <div class="character_field">
+                        <label for="heridas">Heridas:</label>
+                        <textarea id="heridas" placeholder="Describe las heridas del personaje" rows="3"></textarea>
+                    </div>
+
+                    <!-- Daño -->
+                    <div class="character_field">
+                        <label for="dano_recibido">Daño Recibido:</label>
+                        <div class="damage_heal_section">
+                            <input type="number" id="dano_input" placeholder="Cantidad de daño" min="0">
+                            <button id="aplicar_dano" class="damage_button">Aplicar Daño</button>
+                            <div class="damage_log" id="dano_log">
+                                <!-- El historial de daño se mostrará aquí -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Curaciones -->
+                    <div class="character_field">
+                        <label for="curacion_recibida">Curaciones:</label>
+                        <div class="damage_heal_section">
+                            <input type="number" id="curacion_input" placeholder="Cantidad de curación" min="0">
+                            <button id="aplicar_curacion" class="heal_button">Aplicar Curación</button>
+                            <div class="heal_log" id="curacion_log">
+                                <!-- El historial de curaciones se mostrará aquí -->
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Crónicas -->
